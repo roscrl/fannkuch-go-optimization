@@ -13,6 +13,7 @@ import (
 	"fmt"
 	"log"
 	"math/bits"
+	"os"
 	"runtime"
 	"strconv"
 )
@@ -174,13 +175,22 @@ func fannkuch(n int) (int, int) {
 	return checksum, maxFlips
 }
 
+func threadCount() int {
+	if s := os.Getenv("THREADS"); s != "" {
+		if n, err := strconv.Atoi(s); err == nil && n > 0 {
+			return n
+		}
+	}
+	return 4
+}
+
 func main() {
 	n := 12
 	flag.Parse()
 	if flag.NArg() == 1 {
 		n, _ = strconv.Atoi(flag.Arg(0))
 	}
-	runtime.GOMAXPROCS(4)
+	runtime.GOMAXPROCS(threadCount())
 	checksum, maxFlips := fannkuch(n)
 	fmt.Printf("%d\nPfannkuchen(%d) = %d\n", checksum, n, maxFlips)
 }

@@ -46,7 +46,7 @@ RUSTFLAGS='-C target-feature=+ssse3,+sse4.1 -C target-cpu=x86-64-v3' \
 cp "target/${RUST_TARGET}/release/fannkuch_rust" bin/fannkuch_rust_amd64
 
 hyperfine --warmup 1 -r 3 \
-  "${RUN_PREFIX}./bin/fannkuch_go_orig_amd64 ${N}" \
-  "${RUN_PREFIX}./bin/fannkuch_go_opt_amd64 ${N}" \
+  "THREADS=${THREADS} ${RUN_PREFIX}./bin/fannkuch_go_orig_amd64 ${N}" \
+  "THREADS=${THREADS} ${RUN_PREFIX}./bin/fannkuch_go_opt_amd64 ${N}" \
   "RAYON_NUM_THREADS=${THREADS} ${RUN_PREFIX}./bin/fannkuch_rust_amd64 ${N}" \
   "${RUN_PREFIX}./bin/fannkuch_c_amd64 -t ${THREADS} ${N}"

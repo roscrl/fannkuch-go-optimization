@@ -45,7 +45,7 @@ You can pass a different fannkuch size:
 nix develop -c ./bench.sh 10
 ```
 
-Set worker count for Rust/C with `THREADS`:
+Set worker count for all programs with `THREADS`:
 
 ```bash
 THREADS=8 nix develop -c ./bench.sh 12

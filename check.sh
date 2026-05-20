@@ -84,7 +84,7 @@ for n in "${inputs[@]}"; do
     elif [[ $name == c ]]; then
       got=$("${RUN[@]}" "${programs[$name]}" -t "$THREADS" "$n")
     else
-      got=$(run_bin "${programs[$name]}" "$n")
+      got=$(THREADS="$THREADS" run_bin "${programs[$name]}" "$n")
     fi
 
     if [[ "$got" != "$expected" ]]; then
