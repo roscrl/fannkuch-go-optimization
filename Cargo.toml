@@ -1,0 +1,16 @@
+[package]
+name = "fannkuch_rust_bench"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "fannkuch_rust"
+path = "fannkuch_rust.rs"
+
+[dependencies]
+rayon = "1"
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+panic = "abort"
